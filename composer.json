@@ -1,0 +1,27 @@
+{
+    "name": "doqimi/payclip-php-sdk",
+    "description": "This package provides the core functionality of the Clip API, a streamlined and extensible content-linking protocol developed and maintained by Doqimi. It serves as the foundational layer for building and interacting with the Clip service in PHP applications.",
+    "homepage": "https://github.com/doqimi/payclip-php-sdk",
+    "support": {
+        "issues": "https://github.com/doqimi/payclip-php-sdk/issues"
+    },
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Doqimi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Doqimi",
+            "email": "developer@doqimi.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1",
+        "ext-curl": "*",
+        "ext-openssl": "*",
+        "guzzlehttp/guzzle": "*"
+    }
+}
