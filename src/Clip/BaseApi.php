@@ -18,13 +18,43 @@ class BaseApi
 		}
 	}
 
-	protected static function isParamEmpty($key, $paramContext = 'Parameter')
+	// Param validations
+
+	protected static function isParamEmpty($param, $paramName = 'undefined')
 	{
-		if(empty($key))
+		if(empty($param))
 		{
-			throw new \InvalidArgumentException("{$paramContext} must not be empty.");
+			throw new \InvalidArgumentException("Param {$paramName} must not be empty.");
 		}
 	}
+
+	protected static function isParamValidISO8601(string $param, $paramName = 'undefined')
+	{
+		$date = DateTime::createFromFormat('Y-m-d\TH:i:s.v\Z', $param);
+
+		if(!($date && $date->format('Y-m-d\TH:i:s.v\Z') === $param))
+		{
+			throw new \InvalidArgumentException("Param {$paramName} must be a valid ISO8601 date string.");
+		}
+	}
+
+	protected static function isParamInEnum(string $param, array $enum = [], $paramName = 'undefined')
+	{
+		if(!in_array($param, $enum))
+		{
+			throw new \InvalidArgumentException("Param {$paramName} must be one of the defined valid values.");
+		}
+	}
+
+	protected static function isParamLengthValid(string $param, int $length = 0, $paramName = 'undefined')
+	{
+		if(strlen($param) !== $length)
+		{
+			throw new \InvalidArgumentException("Param {$paramName} must have a length of {$length}.");
+		}
+	}
+
+	// Payload Key Validations
 
 	protected static function validateRequiredPayloadKeys(array $keys, array $payload, $context = 'payload')
 	{

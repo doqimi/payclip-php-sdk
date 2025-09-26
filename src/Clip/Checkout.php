@@ -10,6 +10,8 @@ namespace Doqimi\Clip;
 
 final class Checkout extends BaseApi
 {
+	const API_URL = 'https://api.payclip.com';
+
 	/**
 	 * @param Client $client
 	 * @param array $payload
@@ -52,6 +54,8 @@ final class Checkout extends BaseApi
 			$payload['redirection_url'],
 			'redirection_url'
 		);
+
+		$client->setApiUrl(API_URL);
 		
 		return $client->post('v2/checkout',	$payload);
 	}
@@ -64,7 +68,9 @@ final class Checkout extends BaseApi
 	public static function getPaymentLink(Client $client, string $payment_request_id)
 	{
 		self::validateClient($client);
-		self::isParamEmpty($payment_request_id, 'Parameter payment_request_id');
+		self::isParamEmpty($payment_request_id, 'payment_request_id');
+
+		$client->setApiUrl(API_URL);
 
 		return $client->get('v2/checkout/'.$payment_request_id);
 	}
