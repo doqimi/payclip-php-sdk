@@ -26,7 +26,7 @@ SDK-specific usage examples and extended documentation will be added in future r
 ## Features
 
 - [x] Checkout API (v2)
-- [ ] Refunds
+- [x] Refunds
 - [ ] Payments
 - [ ] Settlements
 
