@@ -28,13 +28,13 @@ class BaseApi
 		}
 	}
 
-	protected static function isParamValidISO8601(string $param, $paramName = 'undefined')
+	protected static function isParamValidDateFormat(string $param, string $format, $paramName = 'undefined')
 	{
-		$date = DateTime::createFromFormat('Y-m-d\TH:i:s.v\Z', $param);
+		$date = \DateTime::createFromFormat($format, $param);
 
-		if(!($date && $date->format('Y-m-d\TH:i:s.v\Z') === $param))
+		if(!($date && $date->format($format) === $param))
 		{
-			throw new \InvalidArgumentException("Param {$paramName} must be a valid ISO8601 date string.");
+			throw new \InvalidArgumentException("Param {$paramName} must be a valid date format string.");
 		}
 	}
 
@@ -42,7 +42,7 @@ class BaseApi
 	{
 		if(!in_array($param, $enum))
 		{
-			throw new \InvalidArgumentException("Param {$paramName} must be one of the defined valid values.");
+			throw new \InvalidArgumentException("Param {$paramName} must be one of the predefined valid values.");
 		}
 	}
 

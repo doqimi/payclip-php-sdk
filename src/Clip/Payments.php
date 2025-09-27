@@ -21,7 +21,7 @@ final class Payments extends BaseApi
 	{
 		self::validateClient($client);
 
-		$client->setApiUrl(API_URL);
+		$client->setApiUrl(self::API_URL);
 
 		return $client->get('payments/receipt-no/'.$receipt_no);
 	}
@@ -30,21 +30,21 @@ final class Payments extends BaseApi
 	 * @param Client $client
 	 * @param string $from
 	 * @param string $to
-	 * @param string $status
-	 * @param string $last4
+	 * @param string|null $status
+	 * @param string|null $last4
 	 * @param int $limit
-	 * @param string $paginationToken
+	 * @param string|null $paginationToken
 	 * @return mixed
 	 */
-	public static function listReceipts(Client $client, string $from, string $to, string $status = null, string $last4 = null, int $limit = 20, string $paginationToken = null)
+	public static function listReceipts(Client $client, string $from, string $to, ?string $status = null, ?string $last4 = null, int $limit = 20, ?string $paginationToken = null)
 	{
 		self::validateClient($client);
 
 		self::isParamEmpty($from, 'from');
-		self::isParamValidISO8601($from, 'from');
+		self::isParamValidDateFormat($from, 'Y-m-d\TH:i:s.v\Z', 'from');
 
 		self::isParamEmpty($to, 'to');
-		self::isParamValidISO8601($to, 'to');
+		self::isParamValidDateFormat($to, 'Y-m-d\TH:i:s.v\Z', 'to');
 
 		if($limit < 1) $limit = 20;
 		if($limit > 100) $limit = 100;
@@ -72,8 +72,8 @@ final class Payments extends BaseApi
 			$params['paginationToken'] = $paginationToken;
 		}
 
-		$client->setApiUrl(API_URL);
+		$client->setApiUrl(self::API_URL);
 
-		return $client->get('payments?'.http_build_query($params));
+		return $client->get('payments', $params);
 	}
 }

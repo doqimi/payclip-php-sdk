@@ -19,7 +19,7 @@ use GuzzleHttp\RequestOptions;
 class BaseClient
 {
 	const VERSION = '1.0.0';
-	const API_URL = 'https://api.payclip.com';
+	const API_URL = '';
 	const USER_AGENT = 'Doqimi-Payclip-PHP-SDK';
 
 	/**
@@ -33,12 +33,10 @@ class BaseClient
 	private $baseUri = self::API_URL;
 
 	/**
-	 * @param string $user
-	 * @param string $password
 	 * @param array $requestOptions
-	 * @param null|ClientInterface $httpClient
+	 * @param ClientInterface|null $httpClient
 	 */
-	public function __construct($user = null, $password = null, array $requestOptions = [], ClientInterface $httpClient = null)
+	public function __construct(array $requestOptions = [], ?ClientInterface $httpClient = null)
 	{
 		if ($httpClient && $requestOptions) {
 			throw new \InvalidArgumentException('If argument 3 is provided, argument 4 must be omitted or passed with `null` as value');
@@ -47,7 +45,6 @@ class BaseClient
 			RequestOptions::HEADERS => [
 				'User-Agent' => self::USER_AGENT.'-v'.self::VERSION
 			],
-			RequestOptions::AUTH => [$user, $password],
 			RequestOptions::CONNECT_TIMEOUT => 10,
 			RequestOptions::TIMEOUT => 60,
 		];
@@ -88,7 +85,7 @@ class BaseClient
 	 *
 	 * @return null|\stdClass|array
 	 */
-	public function post($path, array $body = [], array $params = null)
+	public function post($path, array $body = [], ?array $params = null)
 	{
 		return $this->executeRequest('POST', $path, [RequestOptions::JSON => $body, RequestOptions::QUERY => $params]);
 	}
@@ -102,7 +99,7 @@ class BaseClient
 	 *
 	 * @return null|\stdClass|array
 	 */
-	public function put($path, array $body = null, array $params = [])
+	public function put($path, ?array $body = null, array $params = [])
 	{
 		return $this->executeRequest('PUT', $path, [RequestOptions::JSON => $body, RequestOptions::QUERY => $params]);
 	}

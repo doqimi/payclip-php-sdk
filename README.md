@@ -7,7 +7,7 @@
 
 ## Current Status
 
-This SDK is currently under initial development. At this stage, only the **Checkout API** is implemented.
+This SDK is currently under initial development. At this stage, only the **Checkout API**, **Payments API** and **Settlements API** are implemented.
 
 ## Installation
 
@@ -21,14 +21,21 @@ composer require doqimi/payclip-php-sdk
 
 Please refer to the [official Clip API documentation](https://developer.clip.mx/) for full details on API endpoints, authentication, and integration.
 
-SDK-specific usage examples and extended documentation will be added in future releases.
+The **Payclip PHP SDK** expects both the `CLIP_API_KEY` and `CLIP_API_SECRET` to be provided as parameters when initializing the `Client`.
+
+If these are not explicitly provided, the SDK will attempt to read them from the environment variables:
+
+- `CLIP_API_KEY`
+- `CLIP_API_SECRET`
+
+For information on how to generate these credentials for your account, please refer to the [Token de autenticación](https://developer.clip.mx/reference/token-de-autenticacion) section in the Clip developer documentation.
 
 ## Features
 
 - [x] Checkout API (v2)
-- [x] Refunds
-- [ ] Payments
-- [ ] Settlements
+- [ ] Refunds
+- [x] Payments
+- [x] Settlements
 
 
 ## Contributing

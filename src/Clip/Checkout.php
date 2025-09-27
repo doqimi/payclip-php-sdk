@@ -55,7 +55,7 @@ final class Checkout extends BaseApi
 			'redirection_url'
 		);
 
-		$client->setApiUrl(API_URL);
+		$client->setApiUrl(self::API_URL);
 		
 		return $client->post('v2/checkout',	$payload);
 	}
@@ -70,7 +70,7 @@ final class Checkout extends BaseApi
 		self::validateClient($client);
 		self::isParamEmpty($payment_request_id, 'payment_request_id');
 
-		$client->setApiUrl(API_URL);
+		$client->setApiUrl(self::API_URL);
 
 		return $client->get('v2/checkout/'.$payment_request_id);
 	}
