@@ -6,6 +6,7 @@
         "issues": "https://github.com/doqimi/payclip-php-sdk/issues"
     },
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Doqimi\\": "src/"
